@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!-- BEST PRACTICE — Understandable
+     Same demos as ../bad/understandable.html, now clear and predictable. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BEST — Understandable</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; background: #fff; color: #1d2733; }
+  header { background: #1e7a3c; color: #fff; padding: 1rem 1.5rem; }
+  header p { margin: .25rem 0 0; opacity: .95; }
+  main { max-width: 720px; margin: 0 auto; padding: 1.5rem; }
+  section { border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+  h2 { margin-top: 0; font-size: 1.1rem; }
+  .demo-label { display: inline-block; background: #1e7a3c; color: #fff; font-size: .75rem; padding: .15rem .5rem; border-radius: 4px; margin-bottom: .5rem; }
+  input, select, button { font: inherit; padding: .5rem; }
+  :focus-visible { outline: 3px solid #1d4ed8; outline-offset: 2px; }
+
+  form label { display: block; margin-top: .75rem; font-weight: 600; }
+  form input { display: block; width: 260px; }
+  form button { margin-top: 1rem; }
+  .error-summary { display: none; border: 2px solid #b91c1c; border-radius: 6px; background: #fde2e2; color: #7f1d1d; padding: .75rem 1rem; }
+  .error-summary ul { margin: .5rem 0 0; }
+  .field-error { color: #b91c1c; font-weight: 600; margin: .25rem 0 0; display: none; }
+  input[aria-invalid="true"] { border: 2px solid #b91c1c; }
+  .hint { color: #4b5563; font-size: .9rem; margin: .15rem 0 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>BEST practice — Understandable</h1>
+  <p>Clear language, descriptive links, predictable controls and helpful errors.</p>
+</header>
+<main>
+
+  <section>
+    <span class="demo-label">Demo 1</span>
+    <h2>Language declared</h2>
+    <p>This page starts with <code>&lt;html lang="en"&gt;</code>, so screen readers pick the correct pronunciation. Foreign phrases get their own attribute: <span lang="nl">“Doe maar gewoon, dan doe je al gek genoeg.”</span></p>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 2</span>
+    <h2>Links that describe their destination</h2>
+    <p>Each link makes sense on its own — also in a screen reader’s links list:</p>
+    <ul>
+      <li><a href="#">Read our updated returns policy</a></li>
+      <li><a href="#">Download the 2025 annual report (PDF, 2 MB)</a></li>
+      <li><a href="#">Download the price list</a></li>
+      <li><a href="#">Browse our current job openings</a></li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 3</span>
+    <h2>No surprises: user confirms the change</h2>
+    <p>Browse the options freely with the arrow keys — nothing happens until you press the button.</p>
+    <label for="country">Choose your country</label><br>
+    <select id="country">
+      <option value="" selected disabled>Select…</option>
+      <option>Netherlands</option>
+      <option>Belgium</option>
+      <option>Germany</option>
+    </select>
+    <button type="button" id="go">Go to site</button>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 4</span>
+    <h2>Specific, helpful error messages</h2>
+    <p>Submit the empty form: a summary lists every problem and links to the field, each field explains what to fix, and your input is never thrown away.</p>
+    <form id="signup" novalidate>
+      <div class="error-summary" id="error-summary" role="alert" tabindex="-1">
+        <strong>There are problems with your sign-up:</strong>
+        <ul id="error-list"></ul>
+      </div>
+      <label for="name">Name</label>
+      <input id="name" type="text" autocomplete="name">
+      <p class="field-error" id="name-error">Please enter your name.</p>
+
+      <label for="email">E-mail</label>
+      <input id="email" type="email" autocomplete="email">
+      <p class="hint" id="email-hint">We only use this to confirm your registration.</p>
+      <p class="field-error" id="email-error">Please enter an e-mail address, like name@example.com.</p>
+
+      <label for="phone">Phone (optional)</label>
+      <input id="phone" type="tel" autocomplete="tel">
+
+      <button type="submit">Sign up</button>
+    </form>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 5</span>
+    <h2>Plain language</h2>
+    <blockquote>“We refund you two days after we receive your return.”</blockquote>
+    <p>Short sentences, everyday words, one idea per sentence. Aim for lower-secondary reading level for general content — it helps people with cognitive disabilities, non-native speakers, people in a hurry: everyone.</p>
+  </section>
+
+</main>
+
+<script>
+  // Demo 3: context only changes on explicit confirmation
+  document.getElementById('go').addEventListener('click', function () {
+    var select = document.getElementById('country');
+    if (select.value) {
+      alert('Navigating to the ' + select.value + ' site — because you asked to.');
+    } else {
+      select.focus();
+    }
+  });
+
+  // Demo 4: error summary + per-field messages, focus moved to the summary, input preserved
+  document.getElementById('signup').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var errors = [];
+    var name = document.getElementById('name');
+    var email = document.getElementById('email');
+
+    [name, email].forEach(function (field) {
+      field.removeAttribute('aria-invalid');
+      document.getElementById(field.id + '-error').style.display = 'none';
+    });
+
+    if (name.value.trim() === '') errors.push(name);
+    if (email.value.trim() === '' || email.value.indexOf('@') === -1) errors.push(email);
+
+    var summary = document.getElementById('error-summary');
+    var list = document.getElementById('error-list');
+
+    if (errors.length === 0) {
+      summary.style.display = 'none';
+      alert('Signed up — welcome!');
+      return;
+    }
+
+    list.innerHTML = '';
+    errors.forEach(function (field) {
+      var msg = document.getElementById(field.id + '-error');
+      msg.style.display = 'block';
+      field.setAttribute('aria-invalid', 'true');
+      field.setAttribute('aria-describedby', field.id + '-error');
+      var li = document.createElement('li');
+      var link = document.createElement('a');
+      link.href = '#' + field.id;
+      link.textContent = msg.textContent;
+      link.addEventListener('click', function (ev) { ev.preventDefault(); field.focus(); });
+      li.appendChild(link);
+      list.appendChild(li);
+    });
+    summary.style.display = 'block';
+    summary.focus();
+  });
+</script>
+</body>
+</html>

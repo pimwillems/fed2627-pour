@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!-- BAD EXAMPLE — Understandable
+     Every demo on this page breaks the "Understandable" principle on purpose.
+     Note: the <html> element below has NO lang attribute — that is Demo 1.
+     Compare with ../best/understandable.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BAD — Understandable</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; background: #fff; color: #222; }
+  header { background: #b23a3a; color: #fff; padding: 1rem 1.5rem; }
+  header p { margin: .25rem 0 0; opacity: .9; }
+  main { max-width: 720px; margin: 0 auto; padding: 1.5rem; }
+  section { border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+  h2 { margin-top: 0; font-size: 1.1rem; }
+  .demo-label { display: inline-block; background: #b23a3a; color: #fff; font-size: .75rem; padding: .15rem .5rem; border-radius: 4px; margin-bottom: .5rem; }
+  input, select, button { font: inherit; padding: .5rem; }
+  form input { display: block; margin-bottom: .75rem; width: 260px; }
+  .form-error { color: #d64545; font-weight: bold; display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>BAD practice — Understandable</h1>
+  <p>Content and controls must be understandable and predictable. This page is neither.</p>
+</header>
+<main>
+
+  <section>
+    <span class="demo-label">Demo 1</span>
+    <h2>Missing language attribute</h2>
+    <p>This page has no <code>lang</code> attribute on the <code>&lt;html&gt;</code> element. A screen reader has to guess the language — a Dutch screen reader may read this English page with Dutch pronunciation rules, turning it into gibberish.</p>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 2</span>
+    <h2>Meaningless link text</h2>
+    <p>Screen reader users often pull up a list of all links on a page. This is what they get:</p>
+    <ul>
+      <li>Our returns policy changed. <a href="#">Click here</a></li>
+      <li>We published our annual report. <a href="#">Read more</a></li>
+      <li>Download the price list. <a href="#">Click here</a></li>
+      <li>New job openings. <a href="#">More</a></li>
+    </ul>
+    <p>Four links: “Click here, Read more, Click here, More.” Good luck.</p>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 3</span>
+    <h2>Unexpected context change</h2>
+    <p>Merely <em>selecting</em> an option with the arrow keys instantly “navigates”. Keyboard users can never browse the options.</p>
+    <label for="country">Choose your country</label><br>
+    <!-- BAD: onchange immediately fires navigation -->
+    <select id="country" onchange="alert('Navigating to the ' + this.value + ' site... (you never confirmed anything)')">
+      <option value="" selected disabled>Select…</option>
+      <option>Netherlands</option>
+      <option>Belgium</option>
+      <option>Germany</option>
+    </select>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 4</span>
+    <h2>Vague error messages</h2>
+    <p>Leave a field empty and submit. Which field is wrong? What should you fix? The form won’t tell you — and it also wipes what you typed.</p>
+    <form id="signup">
+      <p class="form-error" id="signup-error">ERROR! Invalid input.</p>
+      <label for="name">Name</label>
+      <input id="name" type="text">
+      <label for="email">E-mail</label>
+      <input id="email" type="text">
+      <label for="phone">Phone</label>
+      <input id="phone" type="text">
+      <button type="submit">Sign up</button>
+    </form>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 5</span>
+    <h2>Needless jargon</h2>
+    <p>The same message, as some sites write it:</p>
+    <blockquote>“Per our SLA remediation matrix, asynchronous fulfilment of RMA-adjacent deliverables is contingent upon T+2 settlement of the applicable invoicing artefacts.”</blockquote>
+    <p>Translation: “We refund you two days after we receive your return.” Plain language is an accessibility feature — for people with cognitive disabilities, non-native speakers, and honestly everyone.</p>
+  </section>
+
+</main>
+
+<script>
+  // BAD: vague error, focus not moved to the problem, and user input is thrown away
+  document.getElementById('signup').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var fields = ['name', 'email', 'phone'];
+    var invalid = fields.some(function (id) { return document.getElementById(id).value.trim() === ''; });
+    if (invalid) {
+      document.getElementById('signup-error').style.display = 'block';
+      this.reset(); // and it clears everything you typed, for good measure
+    } else {
+      alert('Signed up!');
+    }
+  });
+</script>
+</body>
+</html>

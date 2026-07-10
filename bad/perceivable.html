@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- BAD EXAMPLE — Perceivable
+     Every demo on this page breaks the "Perceivable" principle on purpose.
+     Compare with ../best/perceivable.html -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BAD — Perceivable</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; background: #fff; color: #222; }
+  header { background: #b23a3a; color: #fff; padding: 1rem 1.5rem; }
+  header p { margin: .25rem 0 0; opacity: .9; }
+  main { max-width: 720px; margin: 0 auto; padding: 1.5rem; }
+  section { border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+  h2 { margin-top: 0; font-size: 1.1rem; }
+  .demo-label { display: inline-block; background: #b23a3a; color: #fff; font-size: .75rem; padding: .15rem .5rem; border-radius: 4px; margin-bottom: .5rem; }
+  img { max-width: 100%; height: auto; }
+
+  /* Demo 3: low-contrast text — fails WCAG contrast on purpose */
+  .low-contrast { color: #c9c9c9; }
+  .low-contrast-btn { background: #f5d76e; color: #ffffff; border: none; padding: .6rem 1.2rem; border-radius: 6px; font-size: 1rem; }
+
+  /* Demo 4: meaning by colour only */
+  .status { display: flex; gap: 1.5rem; list-style: none; padding: 0; }
+  .dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: .4rem; vertical-align: middle; }
+  .ok   { background: #2e9e44; }
+  .down { background: #d64545; }
+  input.error { border: 2px solid #d64545; }
+  input, button { font: inherit; padding: .5rem; }
+
+  /* Demo 5: placeholder as label */
+  form input { display: block; margin-bottom: .75rem; width: 260px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>BAD practice — Perceivable</h1>
+  <p>Information must be presentable in ways users can perceive. This page gets it wrong.</p>
+</header>
+<main>
+
+  <section>
+    <span class="demo-label">Demo 1</span>
+    <h2>Image without alternative text</h2>
+    <p>This chart carries real data, but a screen reader only announces the file name — or nothing at all.</p>
+    <!-- BAD: no alt attribute -->
+    <img src="../assets/chart.svg">
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 2</span>
+    <h2>Important text baked into an image</h2>
+    <p>The discount code exists only inside the image. Screen reader users, and anyone with images disabled, never learn about it.</p>
+    <!-- BAD: essential text only as pixels, and alt is useless -->
+    <img src="../assets/discount.svg" alt="banner">
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 3</span>
+    <h2>Low contrast</h2>
+    <p class="low-contrast">This paragraph explains how to get a refund within 30 days. If you can barely read it, imagine reading it in sunlight or with low vision.</p>
+    <button class="low-contrast-btn">Request refund</button>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 4</span>
+    <h2>Meaning conveyed by colour alone</h2>
+    <ul class="status">
+      <li><span class="dot ok"></span>Payments API</li>
+      <li><span class="dot down"></span>Email service</li>
+      <li><span class="dot ok"></span>Website</li>
+    </ul>
+    <p>Which service is down? Colour-blind users (about 1 in 12 men) can't tell. Neither can a screen reader.</p>
+    <label for="promo">Promo code</label><br>
+    <!-- BAD: the only error signal is a red border -->
+    <input id="promo" class="error" value="POUR-2O">
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 5</span>
+    <h2>Placeholder used as label</h2>
+    <p>Start typing: the placeholder disappears and you have to remember what each field was. Screen readers may not announce placeholders at all.</p>
+    <form>
+      <!-- BAD: no <label> elements -->
+      <input type="text" placeholder="Full name">
+      <input type="text" placeholder="Street and house number">
+      <input type="text" placeholder="Postal code">
+      <button type="button">Save</button>
+    </form>
+  </section>
+
+</main>
+</body>
+</html>

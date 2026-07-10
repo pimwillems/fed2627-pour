@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!-- BAD EXAMPLE — Operable
+     Every demo on this page breaks the "Operable" principle on purpose.
+     Best experienced with the keyboard: put the mouse away and try to use the page with Tab / Enter.
+     Compare with ../best/operable.html -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BAD — Operable</title>
+<style>
+  /* BAD: focus outline removed everywhere — keyboard users are flying blind */
+  * { outline: none !important; }
+
+  body { font-family: system-ui, sans-serif; margin: 0; background: #fff; color: #222; }
+  header { background: #b23a3a; color: #fff; padding: 1rem 1.5rem; }
+  header p { margin: .25rem 0 0; opacity: .9; }
+  nav ul { display: flex; flex-wrap: wrap; gap: .75rem; list-style: none; padding: .5rem 1.5rem; margin: 0; background: #8f2f2f; }
+  nav a { color: #fff; text-decoration: none; font-size: .85rem; }
+  main { max-width: 720px; margin: 0 auto; padding: 1.5rem; }
+  section { border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+  h2 { margin-top: 0; font-size: 1.1rem; }
+  .demo-label { display: inline-block; background: #b23a3a; color: #fff; font-size: .75rem; padding: .15rem .5rem; border-radius: 4px; margin-bottom: .5rem; }
+  input, button { font: inherit; padding: .5rem; }
+
+  /* Demo 2: a div dressed up as a button */
+  .fake-button { display: inline-block; background: #3454d1; color: #fff; padding: .6rem 1.2rem; border-radius: 6px; cursor: pointer; user-select: none; }
+
+  /* Demo 3: hover-only dropdown */
+  .menu { position: relative; display: inline-block; }
+  .menu > span { background: #eee; padding: .5rem 1rem; border-radius: 6px; cursor: default; }
+  .menu-list { display: none; position: absolute; top: 100%; left: 0; background: #fff; border: 1px solid #ccc; border-radius: 6px; padding: .5rem 0; margin: 0; list-style: none; min-width: 180px; box-shadow: 0 4px 12px rgba(0,0,0,.15); }
+  .menu:hover .menu-list { display: block; }
+  .menu-list a { display: block; padding: .4rem 1rem; color: #222; text-decoration: none; }
+  .menu-list a:hover { background: #f0f0f0; }
+
+  /* Demo 5: tiny click targets */
+  .tiny a { font-size: .6rem; margin-right: 2px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>BAD practice — Operable</h1>
+  <p>All functionality must be usable with a keyboard. Put your mouse away and try.</p>
+</header>
+
+<!-- Demo 1: no skip link — keyboard users must tab through all of this on every page -->
+<nav>
+  <ul>
+    <li><a href="#">Home</a></li><li><a href="#">Products</a></li><li><a href="#">Pricing</a></li>
+    <li><a href="#">Docs</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li>
+    <li><a href="#">Press</a></li><li><a href="#">Partners</a></li><li><a href="#">Support</a></li>
+    <li><a href="#">Status</a></li><li><a href="#">Legal</a></li><li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <span class="demo-label">Demo 1</span>
+    <h2>No skip link, no visible focus</h2>
+    <p>Press <kbd>Tab</kbd> from the top of the page. Two problems: you must wade through all twelve nav links to reach the content, and you can never see <em>where</em> your focus is, because this stylesheet removed every outline.</p>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 2</span>
+    <h2>A &lt;div&gt; pretending to be a button</h2>
+    <p>Click works fine with a mouse. Now try to reach it with <kbd>Tab</kbd> and press it with <kbd>Enter</kbd> — you can't. It's not focusable and has no button semantics.</p>
+    <!-- BAD: div + onclick instead of <button> -->
+    <div class="fake-button" onclick="alert('Added to cart! (mouse users only)')">Add to cart</div>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 3</span>
+    <h2>Hover-only dropdown menu</h2>
+    <p>The menu opens on mouse hover only. Keyboard users and most touch-screen users can never open it.</p>
+    <div class="menu">
+      <span>Our services ▾</span>
+      <ul class="menu-list">
+        <li><a href="#">Web development</a></li>
+        <li><a href="#">Accessibility audits</a></li>
+        <li><a href="#">Training</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 4</span>
+    <h2>Keyboard trap</h2>
+    <p>Click into the field below, then try to <kbd>Tab</kbd> out of it. You are stuck — the script swallows the key. Mouse users can click elsewhere; keyboard users cannot leave.</p>
+    <label for="trap">Newsletter e-mail</label><br>
+    <input id="trap" type="email" placeholder="you@example.com">
+  </section>
+
+  <section class="tiny">
+    <span class="demo-label">Demo 5</span>
+    <h2>Tiny touch targets</h2>
+    <p>Try hitting the right page number on a phone (or with a tremor):</p>
+    <a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a href="#">7</a><a href="#">8</a><a href="#">9</a><a href="#">10</a>
+  </section>
+
+</main>
+
+<script>
+  // BAD: deliberately trap keyboard focus inside the newsletter field (Demo 4)
+  document.getElementById('trap').addEventListener('keydown', function (e) {
+    if (e.key === 'Tab' || e.key === 'Escape') {
+      e.preventDefault();
+    }
+  });
+</script>
+</body>
+</html>

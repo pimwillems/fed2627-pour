@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Byte &amp; Bite — Coffee &amp; Code Workshops</title>
+<style>
+  * { box-sizing: border-box; outline: none; }
+  body { font-family: system-ui, sans-serif; margin: 0; background: #faf7f2; color: #33302b; }
+
+  .topbar { background: #4a3728; color: #fff; display: flex; align-items: center; justify-content: space-between; padding: .75rem 1.5rem; }
+  .brand { font-size: 1.25rem; font-weight: bold; letter-spacing: .5px; }
+  .topbar-right { display: flex; align-items: center; gap: 1.25rem; }
+  .topbar a { color: #fff; text-decoration: none; font-size: .9rem; }
+
+  .dropdown { position: relative; }
+  .dropdown-trigger { color: #fff; font-size: .9rem; cursor: default; }
+  .dropdown-panel { display: none; position: absolute; right: 0; top: 100%; background: #fff; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,.18); padding: .5rem 0; min-width: 190px; z-index: 5; }
+  .dropdown:hover .dropdown-panel { display: block; }
+  .dropdown-panel a { display: block; padding: .5rem 1rem; color: #33302b; font-size: .9rem; }
+  .dropdown-panel a:hover { background: #f2ede4; }
+
+  .hero { display: flex; gap: 2rem; align-items: center; max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 1.5rem; }
+  .hero img { border-radius: 12px; flex-shrink: 0; }
+  .hero-tagline { font-size: 2rem; font-weight: bold; margin: 0 0 .5rem; }
+  .hero p { margin: .25rem 0; }
+  .hours { color: #b8b2a7; font-size: .9rem; }
+
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 3rem; }
+  .card { background: #fff; border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+
+  .section-title { font-size: 1.3rem; font-weight: bold; margin: 0 0 1rem; }
+
+  .workshop { display: flex; align-items: center; gap: .75rem; padding: .6rem 0; border-bottom: 1px solid #eee6d8; }
+  .workshop:last-child { border-bottom: none; }
+  .spots { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .spots-open { background: #3fae5a; }
+  .spots-full { background: #d64545; }
+  .workshop-name { flex: 1; }
+  .workshop-date { color: #7a7469; font-size: .9rem; }
+
+  .field { display: block; width: 100%; max-width: 340px; margin-bottom: .9rem; padding: .6rem .75rem; border: 1px solid #d8d0c2; border-radius: 8px; font: inherit; background: #fff; }
+  .field.invalid { border-color: #d64545; }
+  select.field { max-width: 340px; }
+
+  .terms { display: flex; align-items: center; gap: .55rem; margin: 1rem 0; }
+  .checkbox { width: 18px; height: 18px; border: 2px solid #8a8272; border-radius: 4px; cursor: pointer; flex-shrink: 0; }
+  .checkbox.on { background: #4a3728; border-color: #4a3728; }
+
+  .btn { display: inline-block; background: #c46b2c; color: #fff; padding: .7rem 1.6rem; border-radius: 8px; font-weight: 600; cursor: pointer; user-select: none; }
+  .btn:hover { background: #a95a22; }
+
+  footer { background: #4a3728; color: #e8e0d3; padding: 1.5rem; text-align: center; font-size: .9rem; }
+  footer a { color: #e8e0d3; }
+  .newsletter { margin-top: .75rem; }
+  .newsletter input { padding: .5rem .75rem; border-radius: 8px 0 0 8px; border: none; font: inherit; }
+  .newsletter .btn { border-radius: 0 8px 8px 0; padding: .5rem 1rem; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">☕ Byte &amp; Bite</div>
+  <div class="topbar-right">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <div class="dropdown">
+      <span class="dropdown-trigger">Workshops ▾</span>
+      <div class="dropdown-panel">
+        <a href="#">HTML &amp; CSS basics</a>
+        <a href="#">JavaScript for starters</a>
+        <a href="#">Intro to Git</a>
+        <a href="#">Private group sessions</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <img src="../assets/coffee.svg" width="320" height="180">
+  <div>
+    <div class="hero-tagline">Learn to code over great coffee</div>
+    <p>Small-group coding workshops in our café, every week. Beginners welcome — bring a laptop, we bring the flat whites.</p>
+    <p class="hours">Open Tue–Sun, 9:00–18:00 · Workshops start at 19:00 · Herengracht 12, Amsterdam</p>
+    <p>Curious what people think of us? <a href="#">Click here</a>. Want the full schedule as PDF? <a href="#">Click here</a>.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="card">
+    <div class="section-title">Upcoming workshops</div>
+    <div class="workshop">
+      <span class="spots spots-open"></span>
+      <span class="workshop-name">HTML &amp; CSS basics</span>
+      <span class="workshop-date">Tue 14 July, 19:00</span>
+    </div>
+    <div class="workshop">
+      <span class="spots spots-full"></span>
+      <span class="workshop-name">JavaScript for starters</span>
+      <span class="workshop-date">Thu 16 July, 19:00</span>
+    </div>
+    <div class="workshop">
+      <span class="spots spots-open"></span>
+      <span class="workshop-name">Intro to Git</span>
+      <span class="workshop-date">Tue 21 July, 19:00</span>
+    </div>
+    <div class="workshop">
+      <span class="spots spots-full"></span>
+      <span class="workshop-name">Accessibility deep-dive</span>
+      <span class="workshop-date">Thu 23 July, 19:00</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 class="section-title">Reserve your spot</h4>
+    <form id="reserve">
+      <input class="field" type="text" placeholder="Your name" tabindex="3">
+      <input class="field" id="email" type="text" placeholder="E-mail address" tabindex="1">
+      <select class="field" id="workshop-pick" tabindex="2">
+        <option value="" selected disabled>Pick a workshop</option>
+        <option>HTML &amp; CSS basics</option>
+        <option>Intro to Git</option>
+      </select>
+      <div class="terms">
+        <span class="checkbox" onclick="this.classList.toggle('on')"></span>
+        <span>I agree to the house rules</span>
+      </div>
+      <div class="btn" onclick="submitReservation()">Reserve</div>
+    </form>
+  </div>
+
+</div>
+
+<footer>
+  <div>Byte &amp; Bite · Herengracht 12, Amsterdam · <a href="#">Click here</a> for directions</div>
+  <div class="newsletter">
+    <input id="email" type="text" placeholder="E-mail for our newsletter">
+    <span class="btn" onclick="alert('Subscribed!')">Join</span>
+  </div>
+</footer>
+
+<script>
+  // Selecting a workshop immediately "navigates" to its detail page
+  document.getElementById('workshop-pick').addEventListener('change', function () {
+    alert('Loading the "' + this.value + '" page...');
+  });
+
+  function submitReservation() {
+    var fields = document.querySelectorAll('#reserve .field');
+    var ok = true;
+    fields.forEach(function (f) {
+      f.classList.remove('invalid');
+      if (!f.value) { f.classList.add('invalid'); ok = false; }
+    });
+    if (ok) {
+      alert('Reserved! See you there.');
+    }
+    // invalid fields just turn red — no message anywhere
+  }
+</script>
+</body>
+</html>

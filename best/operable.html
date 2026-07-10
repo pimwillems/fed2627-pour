@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!-- BEST PRACTICE — Operable
+     Same demos as ../bad/operable.html, now fully keyboard-operable.
+     Try the whole page without touching the mouse. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BEST — Operable</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; background: #fff; color: #1d2733; }
+  header { background: #1e7a3c; color: #fff; padding: 1rem 1.5rem; }
+  header p { margin: .25rem 0 0; opacity: .95; }
+  nav ul { display: flex; flex-wrap: wrap; gap: .75rem; list-style: none; padding: .5rem 1.5rem; margin: 0; background: #155c2d; }
+  nav a { color: #fff; text-decoration: none; font-size: .85rem; padding: .35rem .5rem; display: inline-block; }
+  main { max-width: 720px; margin: 0 auto; padding: 1.5rem; }
+  section { border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+  h2 { margin-top: 0; font-size: 1.1rem; }
+  .demo-label { display: inline-block; background: #1e7a3c; color: #fff; font-size: .75rem; padding: .15rem .5rem; border-radius: 4px; margin-bottom: .5rem; }
+  input, button { font: inherit; padding: .5rem; }
+
+  /* GOOD: a clear, high-contrast focus indicator on everything interactive */
+  :focus-visible { outline: 3px solid #1d4ed8; outline-offset: 2px; border-radius: 2px; }
+
+  /* Demo 1: skip link — visually hidden until focused */
+  .skip-link { position: absolute; left: -9999px; top: 0; background: #1d4ed8; color: #fff; padding: .75rem 1.25rem; z-index: 10; border-radius: 0 0 8px 0; text-decoration: none; }
+  .skip-link:focus { left: 0; }
+
+  /* Demo 2: a real button */
+  .real-button { background: #1d4ed8; color: #fff; padding: .6rem 1.2rem; border-radius: 6px; border: none; cursor: pointer; font-size: 1rem; }
+
+  /* Demo 3: click-to-open disclosure menu */
+  .menu { position: relative; display: inline-block; }
+  .menu-toggle { background: #e5e9f2; border: 1px solid #c3cad8; padding: .5rem 1rem; border-radius: 6px; cursor: pointer; }
+  .menu-list { display: none; position: absolute; top: 100%; left: 0; background: #fff; border: 1px solid #ccc; border-radius: 6px; padding: .5rem 0; margin: .25rem 0 0; list-style: none; min-width: 200px; box-shadow: 0 4px 12px rgba(0,0,0,.15); }
+  .menu-list.open { display: block; }
+  .menu-list a { display: block; padding: .5rem 1rem; color: #1d2733; text-decoration: none; }
+  .menu-list a:hover { background: #f0f0f0; }
+
+  /* Demo 5: comfortable touch targets (≥ 44×44 px) */
+  .pagination { display: flex; gap: .5rem; list-style: none; padding: 0; }
+  .pagination a { display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; border: 1px solid #c3cad8; border-radius: 6px; text-decoration: none; color: #1d2733; }
+  .pagination a[aria-current="page"] { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
+</style>
+</head>
+<body>
+<!-- Demo 1: skip link is the very first focusable element -->
+<a class="skip-link" href="#content">Skip to main content</a>
+
+<header>
+  <h1>BEST practice — Operable</h1>
+  <p>Everything on this page works with the keyboard. Put your mouse away and try.</p>
+</header>
+
+<nav aria-label="Main">
+  <ul>
+    <li><a href="#">Home</a></li><li><a href="#">Products</a></li><li><a href="#">Pricing</a></li>
+    <li><a href="#">Docs</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li>
+    <li><a href="#">Press</a></li><li><a href="#">Partners</a></li><li><a href="#">Support</a></li>
+    <li><a href="#">Status</a></li><li><a href="#">Legal</a></li><li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<main id="content" tabindex="-1">
+
+  <section>
+    <span class="demo-label">Demo 1</span>
+    <h2>Skip link and visible focus</h2>
+    <p>Press <kbd>Tab</kbd> from the top of the page: the first thing you reach is a “Skip to main content” link that jumps straight past the twelve nav links. And every focused element shows a thick blue outline, so you always know where you are.</p>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 2</span>
+    <h2>A real &lt;button&gt;</h2>
+    <p>Focusable with <kbd>Tab</kbd>, activates with <kbd>Enter</kbd> or <kbd>Space</kbd>, announced as “button” by screen readers — all for free, zero JavaScript needed for the behaviour.</p>
+    <button class="real-button" onclick="alert('Added to cart! (works for everyone)')">Add to cart</button>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 3</span>
+    <h2>Keyboard-friendly disclosure menu</h2>
+    <p>Opens on click / <kbd>Enter</kbd> / <kbd>Space</kbd>, closes with <kbd>Escape</kbd>, and tells screen readers whether it is open via <code>aria-expanded</code>.</p>
+    <div class="menu">
+      <button class="menu-toggle" id="services-toggle" aria-expanded="false" aria-controls="services-menu">Our services ▾</button>
+      <ul class="menu-list" id="services-menu">
+        <li><a href="#">Web development</a></li>
+        <li><a href="#">Accessibility audits</a></li>
+        <li><a href="#">Training</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 4</span>
+    <h2>No keyboard traps</h2>
+    <p>Tab into the field below — and tab right out again. Focus is never held hostage. (Where focus <em>should</em> be contained, like a modal dialog, <kbd>Escape</kbd> must always offer a way out.)</p>
+    <label for="newsletter">Newsletter e-mail</label><br>
+    <input id="newsletter" type="email" autocomplete="email" placeholder="you@example.com">
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 5</span>
+    <h2>Comfortable touch targets</h2>
+    <p>Each page link is at least 44×44 pixels — easy to hit on a phone, with a tremor, or with a stylus.</p>
+    <nav aria-label="Pagination">
+      <ul class="pagination">
+        <li><a href="#" aria-current="page">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+      </ul>
+    </nav>
+  </section>
+
+</main>
+
+<script>
+  // GOOD: disclosure menu — click/Enter/Space toggles, Escape closes and restores focus
+  var toggle = document.getElementById('services-toggle');
+  var menu = document.getElementById('services-menu');
+
+  toggle.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menu.classList.contains('open')) {
+      menu.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
+    }
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', function (e) {
+    if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+</body>
+</html>

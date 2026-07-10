@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" font-family="sans-serif">
+  <rect width="320" height="200" fill="#f4f6fb"/>
+  <text x="160" y="24" text-anchor="middle" font-size="14" font-weight="bold" fill="#1d2733">Website visitors per quarter</text>
+  <g fill="#3454d1">
+    <rect x="40"  y="120" width="40" height="60"/>
+    <rect x="110" y="90"  width="40" height="90"/>
+    <rect x="180" y="60"  width="40" height="120"/>
+    <rect x="250" y="40"  width="40" height="140"/>
+  </g>
+  <g font-size="12" fill="#1d2733" text-anchor="middle">
+    <text x="60"  y="115">1.2k</text>
+    <text x="130" y="85">1.8k</text>
+    <text x="200" y="55">2.4k</text>
+    <text x="270" y="35">3.1k</text>
+  </g>
+  <g font-size="11" fill="#5a6675" text-anchor="middle">
+    <text x="60"  y="194">Q1</text>
+    <text x="130" y="194">Q2</text>
+    <text x="200" y="194">Q3</text>
+    <text x="270" y="194">Q4</text>
+  </g>
+</svg>

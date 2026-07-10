@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>POUR Accessibility Demos</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; background: #f4f6fb; color: #1d2733; }
+  header { background: #1d2733; color: #fff; padding: 1.5rem; text-align: center; }
+  header p { margin: .5rem 0 0; opacity: .85; }
+  main { max-width: 860px; margin: 0 auto; padding: 1.5rem; }
+  :focus-visible { outline: 3px solid #1d4ed8; outline-offset: 2px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  caption { text-align: left; font-size: 1.15rem; font-weight: 600; padding: 0 0 .75rem; }
+  th, td { padding: .8rem 1rem; text-align: left; border-bottom: 1px solid #e5e9f2; }
+  th { background: #eef1f8; }
+  a.bad  { color: #a12c2c; font-weight: 600; }
+  a.good { color: #14652f; font-weight: 600; }
+  .exercise-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.08); padding: 1.25rem 1.5rem; margin-top: 2rem; }
+  .exercise-card h2 { margin-top: 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>POUR Accessibility Demos</h1>
+  <p>Perceivable · Operable · Understandable · Robust — bad vs. best practice</p>
+</header>
+<main>
+  <table>
+    <caption>Demo pages per principle</caption>
+    <thead>
+      <tr>
+        <th scope="col">Principle</th>
+        <th scope="col">Bad practice</th>
+        <th scope="col">Best practice</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Perceivable</th>
+        <td><a class="bad" href="bad/perceivable.html">Bad: Perceivable</a></td>
+        <td><a class="good" href="best/perceivable.html">Best: Perceivable</a></td>
+      </tr>
+      <tr>
+        <th scope="row">Operable</th>
+        <td><a class="bad" href="bad/operable.html">Bad: Operable</a></td>
+        <td><a class="good" href="best/operable.html">Best: Operable</a></td>
+      </tr>
+      <tr>
+        <th scope="row">Understandable</th>
+        <td><a class="bad" href="bad/understandable.html">Bad: Understandable</a></td>
+        <td><a class="good" href="best/understandable.html">Best: Understandable</a></td>
+      </tr>
+      <tr>
+        <th scope="row">Robust</th>
+        <td><a class="bad" href="bad/robust.html">Bad: Robust</a></td>
+        <td><a class="good" href="best/robust.html">Best: Robust</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exercise-card">
+    <h2>Student exercise</h2>
+    <p><a href="exercise/index.html">Byte &amp; Bite — Coffee &amp; Code Workshops</a> looks fine on the surface, but hides ~18 accessibility problems. The assignment is in <code>exercise/README.md</code>; the answer key in <code>exercise/SOLUTION.md</code>.</p>
+  </div>
+</main>
+</body>
+</html>

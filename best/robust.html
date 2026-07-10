@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- BEST PRACTICE — Robust
+     Same demos as ../bad/robust.html, now with valid, semantic markup
+     that browsers and assistive technology can rely on. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BEST — Robust</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; background: #fff; color: #1d2733; }
+  header { background: #1e7a3c; color: #fff; padding: 1rem 1.5rem; }
+  header p { margin: .25rem 0 0; opacity: .95; }
+  main { max-width: 720px; margin: 0 auto; padding: 1.5rem; }
+  section { border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+  h2 { margin-top: 0; font-size: 1.1rem; }
+  .demo-label { display: inline-block; background: #1e7a3c; color: #fff; font-size: .75rem; padding: .15rem .5rem; border-radius: 4px; margin-bottom: .5rem; }
+  input, button { font: inherit; padding: .5rem; }
+  :focus-visible { outline: 3px solid #1d4ed8; outline-offset: 2px; }
+
+  /* Demo 3: custom-styled but NATIVE checkbox */
+  .agree { display: flex; align-items: center; gap: .5rem; cursor: pointer; }
+  .agree input { width: 18px; height: 18px; accent-color: #1d4ed8; }
+
+  /* Demo 4: a normal, visible, accessible button */
+  .danger { background: #b91c1c; color: #fff; border: none; border-radius: 6px; padding: .6rem 1.2rem; cursor: pointer; }
+</style>
+</head>
+<body>
+<header>
+  <h1>BEST practice — Robust</h1>
+  <p>Valid, semantic HTML that every browser and screen reader interprets the same way.</p>
+</header>
+<main>
+
+  <section aria-labelledby="d1">
+    <span class="demo-label">Demo 1</span>
+    <h2 id="d1">Semantic structure and landmarks</h2>
+    <p>This page uses <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code> and real headings (<code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>) in a logical order. Screen reader users can jump between landmarks and headings instead of listening to the page top-to-bottom. Semantics is free functionality — you only have to not throw it away.</p>
+  </section>
+
+  <section aria-labelledby="d2">
+    <span class="demo-label">Demo 2</span>
+    <h2 id="d2">Unique IDs</h2>
+    <p>Every <code>id</code> appears exactly once, so each label focuses its own field — click a label to check.</p>
+    <label for="email-personal">Personal e-mail</label><br>
+    <input id="email-personal" type="email" autocomplete="email"><br><br>
+    <label for="email-work">Work e-mail</label><br>
+    <input id="email-work" type="email">
+  </section>
+
+  <section aria-labelledby="d3">
+    <span class="demo-label">Demo 3</span>
+    <h2 id="d3">Native checkbox, custom look</h2>
+    <p>A real <code>&lt;input type="checkbox"&gt;</code> styled with CSS: keyboard support, a “checkbox” role, checked/unchecked announcements and a clickable label — all built in. Use native elements first; reach for ARIA widgets only when HTML truly has no equivalent.</p>
+    <label class="agree">
+      <input type="checkbox">
+      I agree to the terms and conditions
+    </label>
+  </section>
+
+  <section aria-labelledby="d4">
+    <span class="demo-label">Demo 4</span>
+    <h2 id="d4">ARIA that helps instead of hides</h2>
+    <p>The button below is visible to everyone — on screen <em>and</em> in the accessibility tree — and its <code>aria-describedby</code> adds a warning screen readers announce with it. No ARIA fights the native semantics.</p>
+    <button class="danger" aria-describedby="delete-warning" onclick="alert('This dialog would ask you to confirm first.')">Delete my account</button>
+    <p id="delete-warning">Warning: this permanently removes your account and order history.</p>
+  </section>
+
+  <section aria-labelledby="d5">
+    <span class="demo-label">Demo 5</span>
+    <h2 id="d5">Valid markup</h2>
+    <p>Properly closed tags and only <code>&lt;li&gt;</code> children inside the list — this page passes <code>validator.w3.org</code> without errors, so assistive technology never has to guess.</p>
+    <ol>
+      <li>Step one: unzip the download</li>
+      <li>Step two: open <strong>index.html</strong></li>
+      <li>Step three: that’s it!</li>
+    </ol>
+  </section>
+
+</main>
+</body>
+</html>

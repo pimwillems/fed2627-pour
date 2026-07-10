@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- BEST PRACTICE — Perceivable
+     Same demos as ../bad/perceivable.html, now done right. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BEST — Perceivable</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; background: #fff; color: #1d2733; }
+  header { background: #1e7a3c; color: #fff; padding: 1rem 1.5rem; }
+  header p { margin: .25rem 0 0; opacity: .95; }
+  main { max-width: 720px; margin: 0 auto; padding: 1.5rem; }
+  section { border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+  h2 { margin-top: 0; font-size: 1.1rem; }
+  .demo-label { display: inline-block; background: #1e7a3c; color: #fff; font-size: .75rem; padding: .15rem .5rem; border-radius: 4px; margin-bottom: .5rem; }
+  img { max-width: 100%; height: auto; }
+  input, button { font: inherit; padding: .5rem; }
+
+  /* Demo 3: contrast ratios well above 4.5:1 */
+  .good-contrast { color: #1d2733; }
+  .good-contrast-btn { background: #1d4ed8; color: #ffffff; border: none; padding: .6rem 1.2rem; border-radius: 6px; font-size: 1rem; }
+  .good-contrast-btn:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 2px; }
+
+  /* Demo 4: colour + icon + text */
+  .status { display: flex; gap: 1.5rem; list-style: none; padding: 0; }
+  .badge { display: inline-block; padding: .1rem .5rem; border-radius: 4px; font-size: .85rem; font-weight: 600; margin-right: .4rem; }
+  .ok   { background: #d8f2df; color: #14532d; }
+  .down { background: #fde2e2; color: #7f1d1d; }
+  .field-error-msg { color: #b91c1c; font-weight: 600; }
+  input[aria-invalid="true"] { border: 2px solid #b91c1c; }
+
+  /* Demo 5: real labels */
+  form label { display: block; margin-top: .75rem; font-weight: 600; }
+  form input { display: block; width: 260px; }
+  form button { margin-top: 1rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>BEST practice — Perceivable</h1>
+  <p>The same five demos as the bad page — now everyone can perceive them.</p>
+</header>
+<main>
+
+  <section>
+    <span class="demo-label">Demo 1</span>
+    <h2>Informative image with alt text</h2>
+    <p>The alt text conveys the same information the image does. (Purely decorative images would instead get an empty <code>alt=""</code> so screen readers skip them.)</p>
+    <img src="../assets/chart.svg"
+         alt="Bar chart: website visitors grew every quarter, from 1,200 in Q1 to 1,800 in Q2, 2,400 in Q3 and 3,100 in Q4.">
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 2</span>
+    <h2>Text as real text, image as decoration</h2>
+    <p>The essential information lives in the HTML; the banner merely decorates it, so it gets <code>alt=""</code>.</p>
+    <p><strong>Summer sale:</strong> 20% off with code <code>POUR20</code> until 31 August.</p>
+    <img src="../assets/discount.svg" alt="">
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 3</span>
+    <h2>Sufficient contrast</h2>
+    <p class="good-contrast">This paragraph explains how to get a refund within 30 days — in dark text on a light background (contrast ratio ≈ 14:1, WCAG requires at least 4.5:1 for body text).</p>
+    <button class="good-contrast-btn">Request refund</button>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 4</span>
+    <h2>Colour plus text</h2>
+    <ul class="status">
+      <li><span class="badge ok">✓ Up</span>Payments API</li>
+      <li><span class="badge down">✗ Down</span>Email service</li>
+      <li><span class="badge ok">✓ Up</span>Website</li>
+    </ul>
+    <p>Colour still helps sighted users scan quickly — but the words carry the meaning.</p>
+    <label for="promo">Promo code</label><br>
+    <input id="promo" value="POUR-2O" aria-invalid="true" aria-describedby="promo-error">
+    <p class="field-error-msg" id="promo-error">Error: this code contains the letter O — did you mean POUR-20 with a zero?</p>
+  </section>
+
+  <section>
+    <span class="demo-label">Demo 5</span>
+    <h2>Visible, permanent labels</h2>
+    <p>Labels stay visible while you type, are announced by screen readers, and clicking a label focuses its field. Placeholders are only used for extra hints.</p>
+    <form>
+      <label for="fullname">Full name</label>
+      <input id="fullname" type="text" autocomplete="name">
+      <label for="street">Street and house number</label>
+      <input id="street" type="text" autocomplete="street-address">
+      <label for="zip">Postal code</label>
+      <input id="zip" type="text" autocomplete="postal-code" placeholder="e.g. 1234 AB">
+      <button type="button">Save</button>
+    </form>
+  </section>
+
+</main>
+</body>
+</html>

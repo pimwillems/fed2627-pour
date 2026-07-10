@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- BAD EXAMPLE — Robust
+     Every demo on this page breaks the "Robust" principle on purpose:
+     invalid HTML, div-soup, duplicate IDs and misused ARIA.
+     Tip: run this page through https://validator.w3.org/ during the demo.
+     Compare with ../best/robust.html -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BAD — Robust</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; background: #fff; color: #222; }
+  .header { background: #b23a3a; color: #fff; padding: 1rem 1.5rem; }
+  .header p { margin: .25rem 0 0; opacity: .9; }
+  .main { max-width: 720px; margin: 0 auto; padding: 1.5rem; }
+  .card { border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+  .demo-label { display: inline-block; background: #b23a3a; color: #fff; font-size: .75rem; padding: .15rem .5rem; border-radius: 4px; margin-bottom: .5rem; }
+  .fake-heading { font-size: 1.1rem; font-weight: bold; margin: .5rem 0; }
+  input, button { font: inherit; padding: .5rem; }
+
+  /* Demo 3: fake checkbox */
+  .fake-checkbox { display: inline-block; width: 18px; height: 18px; border: 2px solid #555; border-radius: 3px; vertical-align: middle; margin-right: .5rem; cursor: pointer; }
+  .fake-checkbox.checked { background: #3454d1; border-color: #3454d1; }
+</style>
+</head>
+<body>
+<!-- BAD: no semantic landmarks anywhere — everything is a div -->
+<div class="header">
+  <div class="fake-heading" style="font-size:1.5rem">BAD practice — Robust</div>
+  <p>Content must be reliably interpreted by browsers and assistive technology. This markup fights them instead.</p>
+</div>
+<div class="main">
+
+  <div class="card">
+    <span class="demo-label">Demo 1</span>
+    <div class="fake-heading">Div soup: no semantic structure</div>
+    <p>This entire page uses styled <code>&lt;div&gt;</code>s: no <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;nav&gt;</code>, and the “headings” are just bold text. Screen reader users navigate by headings and landmarks — here they find <strong>none</strong>. Open the rotor/elements list in a screen reader to see the difference.</p>
+  </div>
+
+  <div class="card">
+    <span class="demo-label">Demo 2</span>
+    <div class="fake-heading">Duplicate IDs</div>
+    <p>Both fields below have <code>id="email"</code>. The second label points at the wrong field, and scripts and screen readers only ever find the first one. Click the second label and watch the cursor land in the first field.</p>
+    <!-- BAD: duplicate id -->
+    <label for="email">Personal e-mail</label><br>
+    <input id="email" type="text"><br><br>
+    <label for="email">Work e-mail</label><br>
+    <input id="email" type="text">
+  </div>
+
+  <div class="card">
+    <span class="demo-label">Demo 3</span>
+    <div class="fake-heading">Custom checkbox with no semantics</div>
+    <p>Looks like a checkbox, works with a mouse. But it has no role, no state, no keyboard support. A screen reader announces… nothing. It doesn’t even know it exists.</p>
+    <!-- BAD: div with a click handler, no role/aria-checked/tabindex -->
+    <span class="fake-checkbox" onclick="this.classList.toggle('checked')"></span>I agree to the terms and conditions
+  </div>
+
+  <div class="card">
+    <span class="demo-label">Demo 4</span>
+    <div class="fake-heading">ARIA used to break things</div>
+    <p>ARIA can <em>remove</em> semantics too. The button below is visible on screen but has <code>aria-hidden="true"</code> — screen readers skip it entirely. The first rule of ARIA: don’t use ARIA when HTML already does the job; the second: never hide interactive content.</p>
+    <!-- BAD: visible, focusable control hidden from assistive tech -->
+    <button aria-hidden="true" onclick="alert('A control screen readers cannot see')">Delete my account</button>
+  </div>
+
+  <div class="card">
+    <span class="demo-label">Demo 5</span>
+    <div class="fake-heading">Invalid, sloppy markup</div>
+    <p>The list below has an unclosed tag and a <code>&lt;div&gt;</code> directly inside a <code>&lt;ul&gt;</code>. Browsers guess their way through it; assistive technology gets whatever the guess produces. Paste this page into <code>validator.w3.org</code> and count the errors.</p>
+    <!-- BAD: unclosed <li>, div as child of ul -->
+    <ul>
+      <li>Step one: unzip the download
+      <li>Step two: open <b>index.html
+      <div>Step three: that’s it!</div>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
